@@ -1,0 +1,140 @@
+:root {
+  --blue-color: #4285f4;
+  --white-bg-color: #ffffff;
+  --site-bg: #ffffff;
+}
+
+body {
+  background: var(--site-bg);
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+body.enable-scroll {
+  overflow: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.splash-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.white-layer {
+  background: var(--white-bg-color);
+  z-index: 10;
+}
+
+.blue-layer {
+  background: var(--blue-color);
+  z-index: 20;
+  transform: translate3d(-100%, 0, 0);
+  animation: 
+    slideInRight 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards,
+    slideBackLeft 0.8s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+  animation-delay: 0.2s, 2.8s; 
+}
+
+.logo-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 30;
+  opacity: 0;
+  visibility: hidden;
+  animation: 
+    logoReveal 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards, 
+    logoPulse 0.9s ease-in-out 2 1.0s, 
+    fadeOutLogo 0.2s ease-out forwards;
+  animation-delay: 1.0s, 1.0s, 2.8s;
+}
+
+.logo-container img {
+  width: 240px; 
+  height: auto;
+  max-width: 85vw;
+}
+
+@keyframes logoReveal {
+  0% {
+    transform: translate3d(0, 40px, 0) scale(0.9);
+    opacity: 0;
+    visibility: visible;
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes logoPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+@keyframes fadeOutLogo {
+  0% {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.9) translate3d(-100px, 0, 0);
+    visibility: hidden;
+  }
+}
+
+@keyframes slideInRight {
+  0% { transform: translate3d(-100%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes slideBackLeft {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { 
+    transform: translate3d(-100%, 0, 0); 
+    visibility: hidden;
+  }
+}
+
+.container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  min-height: 100vh;
+  padding: 40px;
+  color: #333;
+  text-align: center;
+  background: var(--site-bg);
+  z-index: 15;
+  opacity: 0;
+  animation: revealSite 0.3s ease-out forwards;
+  animation-delay: 2.8s; 
+}
+
+@keyframes revealSite {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-container img {
+    width: 170px; 
+  }
+}
